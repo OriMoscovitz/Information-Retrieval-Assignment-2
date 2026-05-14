@@ -1,0 +1,11 @@
+iprec_at_recall_0.00    all     0.6412
+iprec_at_recall_0.10    all     0.6193
+iprec_at_recall_0.20    all     0.5477
+iprec_at_recall_0.30    all     0.4347
+iprec_at_recall_0.40    all     0.3173
+iprec_at_recall_0.50    all     0.2970
+iprec_at_recall_0.60    all     0.2195
+iprec_at_recall_0.70    all     0.1946
+iprec_at_recall_0.80    all     0.1301
+iprec_at_recall_0.90    all     0.0425
+iprec_at_recall_1.00    all     0.0258
