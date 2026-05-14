@@ -306,7 +306,7 @@ python3 plot_handler.py
 This reads all `.res` files from `outputs/` and produces `results_english.png`, `results_czech.png`, and 11-point precision-recall curves for each run.
 
 ### Results (English)
-![English](assignment2/results_english.png)
+![English](results_english.png)
 
 * **step 0**: Baseline (run-0)
 * **step 1**: Smart tokenizer
@@ -321,7 +321,7 @@ This reads all `.res` files from `outputs/` and produces `results_english.png`, 
 * **step 10**: Query construction: title + description + narrative
 
 ### Results (Czech)
-![Czech](assignment2/results_czech.png)
+![Czech](results_czech.png)
 
 * **step 0**: Baseline (run-0)
 * **step 1**: Smart tokenizer
@@ -339,13 +339,13 @@ This reads all `.res` files from `outputs/` and produces `results_english.png`, 
 ### 11-Point Precision-Recall Curves
 
 #### Run-0 (Baseline)
-![11P AP Run-0](assignment2/11P_AP_results_0.png)
+![11P AP Run-0](11P_AP_results_0.png)
 
 #### Run-1 (Constrained)
-![11P AP Run-1](assignment2/11P_AP_results_1.png)
+![11P AP Run-1](11P_AP_results_1.png)
 
 #### Run-2 (Unconstrained)
-![11P AP Run-2](assignment2/11P_AP_results_2.png)
+![11P AP Run-2](11P_AP_results_2.png)
 
 ---
 ## 🗂️ System Overview
