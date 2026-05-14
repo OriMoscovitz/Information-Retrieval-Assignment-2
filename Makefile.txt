@@ -1,0 +1,18 @@
+.PHONY: all download-elasticsearch
+
+REPO_URL = https://github.com/OriMoscovitz/Information-Retrieval-Assignment-2.git
+DIR_NAME = Information-Retrieval-Assignment-2
+
+ELASTIC_URL = https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-9.3.3-windows-x86_64.zip
+ELASTIC_ZIP = elasticsearch-9.3.3-windows-x86_64.zip
+
+all: download-elasticsearch
+	@if [ ! -d "$(DIR_NAME)" ]; then \
+		git clone $(REPO_URL); \
+	fi
+	cd $(DIR_NAME)
+
+$(ELASTIC_ZIP):
+	curl -L --fail --output $@ $(ELASTIC_URL)
+
+download-elasticsearch: $(ELASTIC_ZIP)
