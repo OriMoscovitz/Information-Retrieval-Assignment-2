@@ -73,7 +73,7 @@ Recommended version:
 
 Run Elasticsearch locally:
 ```bash
-cd assignment2/elasticsearch-9.3.3
+cd Information-Retrieval-Assignment-2/elasticsearch-9.3.3
 ./bin/elasticsearch
 curl http://localhost:9200
 ```
