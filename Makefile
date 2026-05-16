@@ -1,6 +1,6 @@
 .PHONY: all clone download extract install run clean-archives
 
-all: clone download extract install run
+all: clone download extract install run clean-archives
 
 clone:
 	@if [ ! -d "Information-Retrieval-Assignment-2" ]; then \
