@@ -417,7 +417,6 @@ plot_iprec_curves(1, "iprec_run1_en.txt", "iprec_run1_cs.txt")
 ![11P AP Run-2](11P_AP_results_2.png)
 
 ---
-## 🗂️ System Overview
 
 ## 🗂️ System Overview
 
