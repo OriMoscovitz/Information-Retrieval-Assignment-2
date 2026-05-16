@@ -25,11 +25,11 @@ install: extract
 	pip install -r requirements.txt --break-system-packages
 
 run: install
-	cp "Information-Retrieval-Assignment-2/elasticsearch.yml" "Information-Retrieval-Assignment-2/elasticsearch-9.3.3/config/elasticsearch.yml"
+	cp "Information-Retrieval-Assignment-2/elasticsearch.yml" "Information-Retrieval-Assignment-2/elasticsearch-9.3.3/config/elasticsearch.yml" && \
 	cd "Information-Retrieval-Assignment-2/elasticsearch-9.3.3" && \
 	./bin/elasticsearch & \
-	sleep 10 && \
+	sleep 30 && \
 	curl http://localhost:9200
 
 clean-archives:
-	cd "Information-Retrieval-Assignment-2" && rm -f A1.tgz elasticsearch-9.3.3-windows-x86_64.zip
+	cd "Information-Retrieval-Assignment-2" && rm -f A1.tgz elasticsearch-9.3.3-linux-x86_64.tar.gz
