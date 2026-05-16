@@ -18,6 +18,35 @@ The experiments include:
 - Extended query construction
 
 ---
+## 📋 Table of Contents
+
+- [🛠️ Setup](#️-setup)
+  - [1. Clone the repository](#1-clone-the-repository)
+  - [2. Install dependencies](#2-install-dependencies)
+  - [3. Install Elasticsearch](#3-install-elasticsearch)
+  - [4. Directory structure](#4-directory-structure)
+- [▶️ Running the System](#️-running-the-system)
+  - [Run-0: Baseline](#run-0-baseline-elasticsearch-configuration)
+  - [Run-1: Final Constrained System](#run-1-final-constrained-system)
+  - [Run-2: Final Unconstrained System](#run-2-final-unconstrained-system)
+- [🧪 Reproducing Intermediate Experiments](#-reproducing-intermediate-experiments)
+  - [Experiment 1 - Baseline (Smart Tokenizer)](#experiment-1---baseline-smart-tokenizer)
+  - [Experiment 2 - Stop-word Removal](#experiment-2---stop-word-removal)
+  - [Experiment 3 - Lemmatization](#experiment-3---lemmatization)
+  - [Experiment 4 - Stemming](#experiment-4---stemming-english-only)
+  - [Experiment 5/4 - Equivalence Classes](#experiment-5-english--4-czech---equivalence-classes)
+  - [Experiment 6/5 - DFR Weighting](#experiment-6-english--5-czech---dfr-weighting)
+  - [Experiment 7/6 - BM25 Weighting](#experiment-7-english--6-czech---bm25-weighting)
+  - [Experiment 8/7 - Pseudo-Relevance Feedback](#experiment-8-english--7-czech---pseudo-relevance-feedback-prf)
+  - [Experiment 9/8 - Title + Description](#experiment-9-english--8-czech---query-construction-title--description)
+  - [Experiment 10/9 - Title + Description + Narrative](#experiment-10-english--9-czech---query-construction-title--description--narrative)
+- [📊 Evaluation & Plots](#-evaluation--plots)
+  - [Results (English)](#results-english)
+  - [Results (Czech)](#results-czech)
+  - [11-Point Precision-Recall Curves](#11-point-precision-recall-curves)
+- [🗂️ System Overview](#️-system-overview)
+
+---
 
 ## 🛠️ Setup
 
@@ -297,13 +326,53 @@ elif run == 2:
 ---
 ## 📊 Evaluation & Plots
 
-To evaluate runs against training qrels and generate MAP / P@10 plots, run:
+To evaluate runs against training qrels and generate MAP / P@10 plots and the 11-point precision-recall curves, run:
 
 ```bash
 python3 plot_handler.py
 ```
 
-This reads all `.res` files from `outputs/` and produces `results_english.png`, `results_czech.png`, and 11-point precision-recall curves for each run.
+This reads all `.res` files from `outputs/` and produces `results_english.png` and `results_czech.png`.
+
+To generate the 11-point precision-recall curves, you first need to run the relevant experiment to produce a .res file, then use trec_eval to extract the interpolated precision values at each recall level.
+
+#### Step 1 - Run trec_eval and extract iprec values
+
+After running an experiment, evaluate it with trec_eval and save the iprec_at_recall_* lines to a file:
+```bash
+./A1/trec_eval-9.0.7/trec_eval A1/qrels-train_en.txt outputs/run-1_train_en.res \
+  | grep iprec_at_recall > iprec_run1_en.txt
+ ```
+
+The output file should look like:
+```bash
+iprec_at_recall_0.00    all     0.1765
+iprec_at_recall_0.10    all     0.1570
+iprec_at_recall_0.20    all     0.0969
+iprec_at_recall_0.30    all     0.0729
+iprec_at_recall_0.40    all     0.0677
+iprec_at_recall_0.50    all     0.0566
+iprec_at_recall_0.60    all     0.0330
+iprec_at_recall_0.70    all     0.0069
+iprec_at_recall_0.80    all     0.0041
+iprec_at_recall_0.90    all     0.0021
+iprec_at_recall_1.00    all     0.0021
+ ```
+
+Repeat this for both the English and Czech result files of the same run.
+
+#### Step 2 - Plot the curves
+
+Once you have both `iprec` files, call:
+```bash
+plot_iprec_curves(run, eng_file, cze_file)
+ ```
+where run is the run number (e.g. 0, 1, 2) and eng_file / cze_file are the paths to the saved iprec files for English and Czech respectively. 
+
+For example:
+```bash
+plot_iprec_curves(1, "iprec_run1_en.txt", "iprec_run1_cs.txt")
+ ```
 
 ### Results (English)
 ![English](results_english.png)
