@@ -5,9 +5,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 
 
-def plot_iprec_curves(run):
-    english_file = os.path.join(os.getcwd(), "outputs",f"iprec-{run}-en")
-    czech_file = os.path.join(os.getcwd(), "outputs",f"iprec-{run}-cs")
+def plot_iprec_curves(run, eng_file, cze_file):
+    english_file = os.path.join(os.getcwd(), "outputs", eng_file)
+    czech_file = os.path.join(os.getcwd(), "outputs", cze_file)
 
     recall_levels = [i / 10 for i in range(11)]
 
@@ -153,11 +153,13 @@ def evaluate_and_plot_runs(lang, outputs_dir="outputs", qrels_dir="A1",
 
     plot_run_results(results, lang)
 
-# evaluate_and_plot_runs("en")
-# evaluate_and_plot_runs("cs")
 
-plot_iprec_curves(0)
-plot_iprec_curves(1)
-plot_iprec_curves(2)
+evaluate_and_plot_runs("en")
+evaluate_and_plot_runs("cs")
+
+# UPDATE this with the new paths if you have produced new results
+plot_iprec_curves(0, "iprec-0-en", "iprec-0-cs")
+plot_iprec_curves(1, "iprec-1-en", "iprec-1-cs")
+plot_iprec_curves(2, "iprec-2-en", "iprec-2-cs")
 
 
